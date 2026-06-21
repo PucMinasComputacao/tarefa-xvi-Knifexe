@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMG Transportes — Cadastro de Destino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-fluid px-4 d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo text-decoration-none">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">BMG Transportes</span>
+      </a>
+      <a href="index.html" class="back-btn">← Voltar</a>
+    </div>
+  </header>
+
+  <main class="container-fluid px-4 mt-5 pt-4 pb-5">
+    <div class="section-label mb-4">
+      <span id="formPageLabel">✦ Novo Destino</span>
+    </div>
+
+    <form id="lugarForm" class="form-card" novalidate>
+      <input type="hidden" id="lugarId" />
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label-custom" for="nome">Nome do destino *</label>
+          <input type="text" id="nome" class="form-control-custom" placeholder="Ex: Paris" required>
+          <div class="form-error" data-error-for="nome"></div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label-custom" for="pais">País *</label>
+          <input type="text" id="pais" class="form-control-custom" placeholder="Ex: França" required>
+          <div class="form-error" data-error-for="pais"></div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label-custom" for="continente">Continente *</label>
+          <select id="continente" class="form-control-custom" required>
+            <option value="">Selecione...</option>
+            <option value="Europa">🇪🇺 Europa</option>
+            <option value="Ásia">🌏 Ásia</option>
+            <option value="América do Sul">🌎 América do Sul</option>
+            <option value="América do Norte">🌎 América do Norte</option>
+            <option value="África">🌍 África</option>
+            <option value="Oceania">🌏 Oceania</option>
+          </select>
+          <div class="form-error" data-error-for="continente"></div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label-custom" for="data">Data de publicação *</label>
+          <input type="date" id="data" class="form-control-custom" required>
+          <div class="form-error" data-error-for="data"></div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label-custom" for="imagem_principal">URL da imagem principal *</label>
+          <input type="url" id="imagem_principal" class="form-control-custom" placeholder="https://..." required>
+          <div class="form-error" data-error-for="imagem_principal"></div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label-custom" for="descricao">Descrição curta *</label>
+          <textarea id="descricao" class="form-control-custom" placeholder="Resumo de 1 ou 2 linhas, exibido no card" required></textarea>
+          <div class="form-error" data-error-for="descricao"></div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label-custom" for="conteudo">Conteúdo completo *</label>
+          <textarea id="conteudo" class="form-control-custom" placeholder="Texto detalhado exibido na página de detalhes" required></textarea>
+          <div class="form-error" data-error-for="conteudo"></div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label-custom" for="tags">Tags (separadas por vírgula)</label>
+          <input type="text" id="tags" class="form-control-custom" placeholder="Ex: praia, natureza, cultura">
+        </div>
+
+        <div class="col-12">
+          <div class="form-check-custom">
+            <input type="checkbox" id="destaque">
+            <label class="form-label-custom mb-0" for="destaque" style="text-transform:none; font-size:0.9rem">Marcar como destaque (aparece no carrossel)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="index.html" class="btn-cancel">Cancelar</a>
+        <button type="submit" class="carousel-cta" id="submitBtn">Salvar destino</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/form.js"></script>
+</body>
+</html>

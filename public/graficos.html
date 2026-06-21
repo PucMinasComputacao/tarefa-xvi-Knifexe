@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMG Transportes — Visualização de Dados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .charts-hero {
+      padding: 100px 0 40px;
+      text-align: center;
+    }
+    .charts-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .charts-hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .gold-accent { color: var(--gold); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-card .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+    }
+
+    .chart-section {
+      margin-bottom: 48px;
+    }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+    .chart-card h2 {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .chart-card .chart-subtitle {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 28px;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 320px;
+    }
+    .chart-wrapper-sm {
+      position: relative;
+      height: 280px;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      padding: 6px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: var(--font-body);
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #000;
+    }
+
+    .destaque-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .destaque-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--surface2);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .destaque-rank {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 32px;
+    }
+    .destaque-info { flex: 1; }
+    .destaque-nome {
+      font-weight: 500;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .destaque-pais {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .destaque-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .tag-pill {
+      padding: 2px 10px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .loading-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 240px;
+      color: var(--muted);
+      gap: 16px;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 2px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-fluid px-4 d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">BMG Transportes</span>
+    </a>
+    <nav class="d-none d-md-flex gap-4 align-items-center">
+      <a href="index.html" class="nav-link-custom">Destinos</a>
+      <a href="graficos.html" class="nav-link-custom active">Análise</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container-fluid px-4">
+
+  <div class="charts-hero">
+    <div class="section-label mb-3"><span>✦ Visualização de Dados</span></div>
+    <h1>Análise dos <span class="gold-accent">Destinos</span></h1>
+    <p>Explore os dados dos destinos cadastrados de forma visual e interativa.</p>
+  </div>
+
+  <!-- Stats rápidas -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-number" id="totalDestinos">—</div><div class="stat-label">Destinos</div></div>
+    <div class="stat-card"><div class="stat-number" id="totalContinentes">—</div><div class="stat-label">Continentes</div></div>
+    <div class="stat-card"><div class="stat-number" id="totalDestaques">—</div><div class="stat-label">Em Destaque</div></div>
+    <div class="stat-card"><div class="stat-number" id="totalAtracoes">—</div><div class="stat-label">Atrações</div></div>
+    <div class="stat-card"><div class="stat-number" id="totalComentarios">—</div><div class="stat-label">Avaliações</div></div>
+  </div>
+
+  <!-- Gráfico 1: Destinos por Continente -->
+  <div class="row g-4 chart-section">
+    <div class="col-lg-8">
+      <div class="chart-card">
+        <h2>Destinos por Continente</h2>
+        <p class="chart-subtitle">Quantidade de destinos cadastrados em cada continente</p>
+        <div class="filter-bar" id="filtroContFilter"></div>
+        <div class="chart-wrapper">
+          <canvas id="chartContinentes"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="chart-card h-100">
+        <h2>Distribuição</h2>
+        <p class="chart-subtitle">Percentual por continente</p>
+        <div class="chart-wrapper-sm">
+          <canvas id="chartPizza"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico 2: Atrações por Destino -->
+  <div class="chart-section">
+    <div class="chart-card">
+      <h2>Atrações por Destino</h2>
+      <p class="chart-subtitle">Número de pontos turísticos listados em cada destino</p>
+      <div class="chart-wrapper">
+        <canvas id="chartAtracoes"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ranking + Gráfico de Tags -->
+  <div class="row g-4 chart-section">
+    <div class="col-lg-6">
+      <div class="chart-card">
+        <h2>Tags Mais Frequentes</h2>
+        <p class="chart-subtitle">Temas que mais aparecem nos destinos</p>
+        <div class="chart-wrapper">
+          <canvas id="chartTags"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="chart-card">
+        <h2>Ranking de Destinos</h2>
+        <p class="chart-subtitle">Ordenados por data de cadastro e destaque</p>
+        <div class="destaque-list" id="rankingList">
+          <div class="loading-overlay"><div class="spinner"></div><span>Carregando...</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer mt-5">
+  <div class="container-fluid px-4 text-center py-4">
+    <span class="logo-text" style="font-size:1.1rem">BMG Transportes</span>
+    <p class="mt-2" style="color:var(--muted);font-size:0.8rem">© 2026 · Visualização de Dados</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const API = 'http://localhost:3000';
+
+const GOLD = '#c9a84c';
+const GOLD2 = '#e8c96b';
+const ACCENT = '#d4855a';
+const MUTED = '#8a8070';
+const TEXT = '#f0ece4';
+const SURFACE2 = '#1e1c18';
+
+const PALETTE = [
+  '#c9a84c','#d4855a','#7a9e7e','#6b8cba','#b07cc6','#d4a0a0','#7fc8c8','#c8b07f'
+];
+
+Chart.defaults.color = MUTED;
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 12;
+
+let chartCont, chartPizza, chartAtrac, chartTags;
+let dadosGlobais = null;
+
+async function carregarDados() {
+  try {
+    const [lugaresRes, comentariosRes] = await Promise.all([
+      fetch(`${API}/lugares`),
+      fetch(`${API}/comentarios`)
+    ]);
+    const lugares = await lugaresRes.json();
+    const comentarios = await comentariosRes.json();
+    return { lugares, comentarios };
+  } catch (e) {
+    // Fallback com dados embutidos caso o servidor não esteja rodando
+    return getDadosEmbutidos();
+  }
+}
+
+function getDadosEmbutidos() {
+  return {
+    lugares: [
+      { id:1,nome:"Paris",pais:"França",continente:"Europa",destaque:true,data:"2026-03-30",atracoes:[{},{},{}],tags:["arte","gastronomia","cultura","arquitetura"] },
+      { id:2,nome:"Kyoto",pais:"Japão",continente:"Ásia",destaque:false,data:"2026-03-28",atracoes:[{},{},{}],tags:["templos","natureza","tradição","cerejeiras"] },
+      { id:3,nome:"Rio de Janeiro",pais:"Brasil",continente:"América do Sul",destaque:true,data:"2026-03-27",atracoes:[{},{},{}],tags:["praia","natureza","cultura","samba"] },
+      { id:4,nome:"Cidade do Cabo",pais:"África do Sul",continente:"África",destaque:false,data:"2026-03-25",atracoes:[{},{},{}],tags:["natureza","montanha","praia","vinícolas"] },
+      { id:5,nome:"Barcelona",pais:"Espanha",continente:"Europa",destaque:true,data:"2026-03-22",atracoes:[{},{},{}],tags:["arte","arquitetura","gastronomia","praia"] },
+      { id:6,nome:"Rio Grande do Sul",pais:"Brasil",continente:"América do Sul",destaque:true,data:"2026-03-22",atracoes:[{},{},{}],tags:["gaúcho","vinícolas","serra","natureza"] },
+      { id:7,nome:"Nova York",pais:"Estados Unidos",continente:"América do Norte",destaque:false,data:"2026-04-01",atracoes:[{},{},{}],tags:["metrópole","cultura","moda","arte"] },
+      { id:8,nome:"Roma",pais:"Itália",continente:"Europa",destaque:false,data:"2026-04-05",atracoes:[{},{},{}],tags:["história","arte","gastronomia","arquitetura"] },
+      { id:9,nome:"Bali",pais:"Indonésia",continente:"Ásia",destaque:true,data:"2026-04-10",atracoes:[{},{},{}],tags:["praia","espiritualidade","natureza","surf"] },
+      { id:10,nome:"Lisboa",pais:"Portugal",continente:"Europa",destaque:false,data:"2026-04-15",atracoes:[{},{},{}],tags:["fado","história","gastronomia","cultura"] }
+    ],
+    comentarios: [
+      { id:1,lugarId:1,autor:"Mariana Costa",texto:"Paris é mágica!",nota:5 },
+      { id:2,lugarId:3,autor:"Rafael Lima",texto:"Rio superou expectativas.",nota:5 },
+      { id:3,lugarId:5,autor:"Sofia Mendes",texto:"Barcelona é perfeita.",nota:5 },
+      { id:4,lugarId:9,autor:"André Moreira",texto:"Bali é incrível.",nota:5 }
+    ]
+  };
+}
+
+function contarPorContinente(lugares) {
+  const map = {};
+  lugares.forEach(l => {
+    map[l.continente] = (map[l.continente] || 0) + 1;
+  });
+  return map;
+}
+
+function contarTags(lugares) {
+  const map = {};
+  lugares.forEach(l => {
+    (l.tags || []).forEach(t => {
+      map[t] = (map[t] || 0) + 1;
+    });
+  });
+  return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,8);
+}
+
+function renderStats({ lugares, comentarios }) {
+  document.getElementById('totalDestinos').textContent = lugares.length;
+  const continentes = new Set(lugares.map(l=>l.continente));
+  document.getElementById('totalContinentes').textContent = continentes.size;
+  document.getElementById('totalDestaques').textContent = lugares.filter(l=>l.destaque).length;
+  const totalAtrac = lugares.reduce((acc,l)=> acc + (l.atracoes||[]).length, 0);
+  document.getElementById('totalAtracoes').textContent = totalAtrac;
+  document.getElementById('totalComentarios').textContent = comentarios.length;
+}
+
+function renderChartContinentes(lugares, filtro = 'todos') {
+  const map = contarPorContinente(lugares);
+  let entries = Object.entries(map).sort((a,b)=>b[1]-a[1]);
+
+  if (filtro !== 'todos') {
+    entries = entries.filter(([c])=> c.toLowerCase().includes(filtro.toLowerCase()));
+  }
+
+  const labels = entries.map(([c])=>c);
+  const data = entries.map(([,n])=>n);
+  const colors = labels.map((_,i)=> PALETTE[i % PALETTE.length]);
+
+  const cfg = {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Destinos',
+        data,
+        backgroundColor: colors.map(c=>c+'bb'),
+        borderColor: colors,
+        borderWidth: 1.5,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y} destino${ctx.parsed.y > 1 ? 's' : ''}`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: MUTED } },
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, color: MUTED },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        }
+      }
+    }
+  };
+
+  if (chartCont) { chartCont.destroy(); }
+  chartCont = new Chart(document.getElementById('chartContinentes'), cfg);
+}
+
+function renderChartPizza(lugares) {
+  const map = contarPorContinente(lugares);
+  const entries = Object.entries(map).sort((a,b)=>b[1]-a[1]);
+  const labels = entries.map(([c])=>c);
+  const data = entries.map(([,n])=>n);
+
+  if (chartPizza) chartPizza.destroy();
+  chartPizza = new Chart(document.getElementById('chartPizza'), {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: PALETTE.slice(0, labels.length).map(c=>c+'cc'),
+        borderColor: PALETTE.slice(0, labels.length),
+        borderWidth: 1.5,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: MUTED, boxWidth: 12, padding: 12, font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+function renderChartAtracoes(lugares) {
+  const sorted = [...lugares].sort((a,b)=> (b.atracoes||[]).length - (a.atracoes||[]).length);
+  const labels = sorted.map(l => l.nome);
+  const data = sorted.map(l => (l.atracoes||[]).length);
+
+  if (chartAtrac) chartAtrac.destroy();
+  chartAtrac = new Chart(document.getElementById('chartAtracoes'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Atrações',
+        data,
+        backgroundColor: data.map((_,i)=> PALETTE[i % PALETTE.length]+'99'),
+        borderColor: data.map((_,i)=> PALETTE[i % PALETTE.length]),
+        borderWidth: 1.5,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.x} atração${ctx.parsed.x !== 1 ? 'ões' : ''}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, color: MUTED },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        },
+        y: { grid: { display: false }, ticks: { color: TEXT } }
+      }
+    }
+  });
+}
+
+function renderChartTags(lugares) {
+  const entries = contarTags(lugares);
+  const labels = entries.map(([t])=>t);
+  const data = entries.map(([,n])=>n);
+
+  if (chartTags) chartTags.destroy();
+  chartTags = new Chart(document.getElementById('chartTags'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Ocorrências',
+        data,
+        backgroundColor: PALETTE.map(c=>c+'99'),
+        borderColor: PALETTE,
+        borderWidth: 1.5,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: MUTED } },
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, color: MUTED },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+function renderRanking(lugares) {
+  const sorted = [...lugares].sort((a,b)=> {
+    if (a.destaque && !b.destaque) return -1;
+    if (!a.destaque && b.destaque) return 1;
+    return new Date(b.data) - new Date(a.data);
+  }).slice(0, 6);
+
+  const container = document.getElementById('rankingList');
+  container.innerHTML = '';
+
+  sorted.forEach((l, i) => {
+    const el = document.createElement('div');
+    el.className = 'destaque-item';
+    el.innerHTML = `
+      <div class="destaque-rank">${i+1}</div>
+      <div class="destaque-info">
+        <div class="destaque-nome">${l.nome} ${l.destaque ? '<span style="color:var(--gold);font-size:0.75rem">★ Destaque</span>' : ''}</div>
+        <div class="destaque-pais">${l.pais} · ${l.continente}</div>
+        <div class="destaque-tags">
+          ${(l.tags||[]).slice(0,3).map(t=>`<span class="tag-pill">${t}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+function renderFiltros(lugares) {
+  const continentes = [...new Set(lugares.map(l=>l.continente))].sort();
+  const bar = document.getElementById('filtroContFilter');
+  bar.innerHTML = '';
+
+  const todos = document.createElement('button');
+  todos.className = 'filter-btn active';
+  todos.textContent = 'Todos';
+  todos.addEventListener('click', () => {
+    bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    todos.classList.add('active');
+    renderChartContinentes(lugares, 'todos');
+  });
+  bar.appendChild(todos);
+
+  continentes.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = c;
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderChartContinentes(lugares, c);
+    });
+    bar.appendChild(btn);
+  });
+}
+
+async function init() {
+  const { lugares, comentarios } = await carregarDados();
+  dadosGlobais = { lugares, comentarios };
+
+  renderStats({ lugares, comentarios });
+  renderFiltros(lugares);
+  renderChartContinentes(lugares);
+  renderChartPizza(lugares);
+  renderChartAtracoes(lugares);
+  renderChartTags(lugares);
+  renderRanking(lugares);
+}
+
+init();
+</script>
+</body>
+</html>

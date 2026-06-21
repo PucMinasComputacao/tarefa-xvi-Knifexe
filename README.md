@@ -25,14 +25,16 @@ Controle de versionamento avançado com Git (commits organizados e tags).
 
 ## Informações Gerais
 
-- Nome:
-- Matricula:
+- Nome: Gabriel Henrique de Souza Rodrigues
+- Matricula: 913558
 
 ## Prints do trabalho
 
 <<  COLOQUE A IMAGEM - TELA DE CARDS DE PRODUTOS - AQUI >>
+![Imagem Card de Produtos](images/inicial.png)
 
 <<  COLOQUE A IMAGEM - TELA DE DETALHE DO PRODUTO - AQUI >>
+![Imagem Detalhes do Produtos](images/detalhes.png)
 
 <<  COLOQUE A IMAGEM - TELA DO CONSOLE - AQUI >>
-
+![Imagem Tela do Console](images/console.png)

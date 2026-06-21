@@ -1,0 +1,193 @@
+{
+  "lugares": [
+    {
+      "id": 1,
+      "nome": "Paris",
+      "descricao": "Capital francesa famosa por arte, gastronomia e arquitetura icônica.",
+      "conteudo": "Paris oferece museus de classe mundial, boulevards arborizados e cafés charmosos. Ideal para quem busca história, cultura e experiências gastronômicas únicas a cada esquina.",
+      "pais": "França",
+      "continente": "Europa",
+      "destaque": true,
+      "data": "2026-03-30",
+      "imagem_principal": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Torre Eiffel", "descricao": "Monumento símbolo de Paris com mirantes panorâmicos.", "imagem": "https://tse2.mm.bing.net/th/id/OIP.w2RRL0Fu48d4nAAh8yCDhgHaLc?cb=thfvnext&w=474&h=379&c=7&p=0" },
+        { "id": 2, "nome": "Museu do Louvre", "descricao": "Maior museu de arte do mundo, lar da Mona Lisa.", "imagem": "https://images.unsplash.com/photo-1565799557186-e36567ce474a?w=600&q=80" },
+        { "id": 3, "nome": "Catedral de Notre-Dame", "descricao": "Obra-prima gótica às margens do Sena.", "imagem": "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?w=600&q=80" }
+      ],
+      "tags": ["arte", "gastronomia", "cultura", "arquitetura"]
+    },
+    {
+      "id": 2,
+      "nome": "Kyoto",
+      "descricao": "Antiga capital do Japão, reconhecida por templos, jardins e tradições.",
+      "conteudo": "Kyoto preserva santuários xintoístas, templos budistas e bairros históricos. Visita imperdível para contemplar a florada das cerejeiras e a culinária kaiseki em ambiente sereno.",
+      "pais": "Japão",
+      "continente": "Ásia",
+      "destaque": false,
+      "data": "2026-03-28",
+      "imagem_principal": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Fushimi Inari Taisha", "descricao": "Santuário famoso por milhares de portais torii.", "imagem": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" },
+        { "id": 2, "nome": "Kinkaku-ji (Pavilhão Dourado)", "descricao": "Templo zen coberto com folhas de ouro em um lago sereno.", "imagem": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=80" },
+        { "id": 3, "nome": "Arashiyama", "descricao": "Distrito cênico com o icônico bosque de bambus.", "imagem": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80" }
+      ],
+      "tags": ["templos", "natureza", "tradição", "cerejeiras"]
+    },
+    {
+      "id": 3,
+      "nome": "Rio de Janeiro",
+      "descricao": "Cidade maravilhosa com praias, morros e ritmo contagiante.",
+      "conteudo": "Entre o mar e a mata, o Rio combina belezas naturais, patrimônio histórico e vida cultural vibrante. Ideal para quem busca sol, trilhas urbanas e muita música ao vivo.",
+      "pais": "Brasil",
+      "continente": "América do Sul",
+      "destaque": true,
+      "data": "2026-03-27",
+      "imagem_principal": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Cristo Redentor", "descricao": "Estátua no topo do Corcovado com vista panorâmica da cidade.", "imagem": "https://tse3.mm.bing.net/th/id/OIP.RoAeZMlhtl0Zy--EcKOJWQHaFj?r=0&w=474&h=379&c=7&p=0" },
+        { "id": 2, "nome": "Pão de Açúcar", "descricao": "Complexo de morros com bondinho e mirantes sobre a baía.", "imagem": "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=600&q=80" },
+        { "id": 3, "nome": "Jardim Botânico", "descricao": "Reserva com espécies nativas e alamedas de palmeiras imperiais.", "imagem": "https://images.unsplash.com/photo-1518182170546-07661fd94144?w=600&q=80" }
+      ],
+      "tags": ["praia", "natureza", "cultura", "samba"]
+    },
+    {
+      "id": 4,
+      "nome": "Cidade do Cabo",
+      "descricao": "Destino costeiro com montanhas dramáticas e vinícolas próximas.",
+      "conteudo": "Mistura natureza exuberante, praias deslumbrantes, cultura plural e gastronomia de alta qualidade. A Table Mountain domina a paisagem e o Cape Point oferece trilhas e vistas oceânicas únicas.",
+      "pais": "África do Sul",
+      "continente": "África",
+      "destaque": false,
+      "data": "2026-03-25",
+      "imagem_principal": "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Table Mountain", "descricao": "Montanha icônica com trilhas e teleférico.", "imagem": "https://images.unsplash.com/photo-1580398136575-2c5e4fd18d33?w=600&q=80" },
+        { "id": 2, "nome": "V&A Waterfront", "descricao": "Área portuária com lojas, restaurantes e aquário.", "imagem": "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?w=600&q=80" },
+        { "id": 3, "nome": "Boulders Beach", "descricao": "Praia famosa pela colônia de pinguins-africanos.", "imagem": "https://images.unsplash.com/photo-1531168556467-80aace0d0144?w=600&q=80" }
+      ],
+      "tags": ["natureza", "montanha", "praia", "vinícolas"]
+    },
+    {
+      "id": 5,
+      "nome": "Barcelona",
+      "descricao": "Cidade mediterrânea vibrante, marcada pelas obras de Gaudí.",
+      "conteudo": "Barcelona combina praias urbanas, gastronomia catalã e arquitetura modernista surpreendente. Um destino que encanta tanto amantes de arte quanto de vida noturna intensa.",
+      "pais": "Espanha",
+      "continente": "Europa",
+      "destaque": true,
+      "data": "2026-03-22",
+      "imagem_principal": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Sagrada Família", "descricao": "Basílica inacabada, obra-prima de Antoni Gaudí.", "imagem": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80" },
+        { "id": 2, "nome": "Parque Güell", "descricao": "Parque com mosaicos coloridos e vistas da cidade.", "imagem": "https://images.unsplash.com/photo-1561131668-f63504fc549d?w=600&q=80" },
+        { "id": 3, "nome": "Casa Batlló", "descricao": "Edifício modernista com fachada ondulante e interiores criativos.", "imagem": "https://images.unsplash.com/photo-1549918864-48ac978761a4?w=600&q=80" }
+      ],
+      "tags": ["arte", "arquitetura", "gastronomia", "praia"]
+    },
+    {
+      "id": 6,
+      "nome": "Rio Grande do Sul",
+      "descricao": "Estado brasileiro marcado por tradições gaúchas, serras, vinícolas e paisagens naturais.",
+      "conteudo": "O Rio Grande do Sul combina cultura tradicional, gastronomia típica e destinos naturais impressionantes. Entre serras, cânions, praias e cidades históricas, o estado oferece experiências únicas para quem busca aventura, clima acolhedor e forte identidade cultural.",
+      "pais": "Brasil",
+      "continente": "América do Sul",
+      "destaque": true,
+      "data": "2026-03-22",
+      "imagem_principal": "https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Gramado", "descricao": "Charmosa cidade da Serra Gaúcha conhecida pelo clima europeu, ruas floridas e gastronomia sofisticada.", "imagem": "https://images.unsplash.com/photo-1573470814965-dc81b6d54c85?w=600&q=80" },
+        { "id": 2, "nome": "Canela", "descricao": "Destino cercado por natureza exuberante e belas paisagens da Serra Gaúcha.", "imagem": "https://images.unsplash.com/photo-1598961481160-5bccef79e86f?w=600&q=80" },
+        { "id": 3, "nome": "Bento Gonçalves", "descricao": "Capital brasileira do vinho, reúne vinícolas tradicionais, cultura italiana e paisagens encantadoras.", "imagem": "https://images.unsplash.com/photo-1506377585622-bedcbb027afc?w=600&q=80" }
+      ],
+      "tags": ["gaúcho", "vinícolas", "serra", "natureza"]
+    },
+    {
+      "id": 7,
+      "nome": "Nova York",
+      "descricao": "A cidade que nunca dorme: metrópole global de arte, moda e negócios.",
+      "conteudo": "Nova York reúne Times Square, Central Park, museus de renome mundial e uma gastronomia cosmopolita inigualável. É o destino ideal para quem quer sentir o pulso de uma das cidades mais icônicas do planeta.",
+      "pais": "Estados Unidos",
+      "continente": "América do Norte",
+      "destaque": false,
+      "data": "2026-04-01",
+      "imagem_principal": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Central Park", "descricao": "Enorme parque urbano no coração de Manhattan.", "imagem": "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" },
+        { "id": 2, "nome": "Estátua da Liberdade", "descricao": "Símbolo da liberdade americana, acessível de barco.", "imagem": "https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?w=600&q=80" },
+        { "id": 3, "nome": "Empire State Building", "descricao": "Arranha-céu icônico com observatório no 86º andar.", "imagem": "https://images.unsplash.com/photo-1555109307-f7d9da25c244?w=600&q=80" }
+      ],
+      "tags": ["metrópole", "cultura", "moda", "arte"]
+    },
+    {
+      "id": 8,
+      "nome": "Roma",
+      "descricao": "A Cidade Eterna com milênios de história, arte e gastronomia.",
+      "conteudo": "Roma é um museu a céu aberto onde o Coliseu, o Vaticano e o Panteão convivem com mercados animados e trattorias autênticas. Um destino que impressiona em cada esquina.",
+      "pais": "Itália",
+      "continente": "Europa",
+      "destaque": false,
+      "data": "2026-04-05",
+      "imagem_principal": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Coliseu", "descricao": "Anfiteatro romano, símbolo do Império Romano.", "imagem": "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=600&q=80" },
+        { "id": 2, "nome": "Vaticano", "descricao": "O menor país do mundo, com a Basílica de São Pedro e a Capela Sistina.", "imagem": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?w=600&q=80" },
+        { "id": 3, "nome": "Fontana di Trevi", "descricao": "Famosa fonte barroca onde se joga uma moeda por bons augúrios.", "imagem": "https://images.unsplash.com/photo-1525874684015-58379d421a52?w=600&q=80" }
+      ],
+      "tags": ["história", "arte", "gastronomia", "arquitetura"]
+    },
+    {
+      "id": 9,
+      "nome": "Bali",
+      "descricao": "Ilha dos deuses: espiritualidade, praias paradisíacas e arrozais em terraços.",
+      "conteudo": "Bali oferece uma mistura única de templos hindus, cerimônias coloridas, praias de surf e retiros de bem-estar. É um destino que alimenta a alma e os sentidos em cada momento.",
+      "pais": "Indonésia",
+      "continente": "Ásia",
+      "destaque": true,
+      "data": "2026-04-10",
+      "imagem_principal": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Templo Tanah Lot", "descricao": "Templo sobre uma rocha no mar, especialmente belo ao entardecer.", "imagem": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" },
+        { "id": 2, "nome": "Ubud", "descricao": "Centro cultural de Bali com museus, mercados e arrozais.", "imagem": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80" },
+        { "id": 3, "nome": "Seminyak", "descricao": "Bairro sofisticado com praias de pôr do sol e restaurantes beira-mar.", "imagem": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" }
+      ],
+      "tags": ["praia", "espiritualidade", "natureza", "surf"]
+    },
+    {
+      "id": 10,
+      "nome": "Lisboa",
+      "descricao": "Capital portuguesa com fados, miradouros e pastéis de nata.",
+      "conteudo": "Lisboa encanta com sua luz singular, bairros históricos como Alfama, elétricos amarelos e o melhor pastel de nata do mundo em Belém. Uma cidade pequena com alma grandíssima.",
+      "pais": "Portugal",
+      "continente": "Europa",
+      "destaque": false,
+      "data": "2026-04-15",
+      "imagem_principal": "https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?w=1200&q=80",
+      "atracoes": [
+        { "id": 1, "nome": "Torre de Belém", "descricao": "Monumento manuelino à entrada do Tejo, símbolo das navegações.", "imagem": "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?w=600&q=80" },
+        { "id": 2, "nome": "Alfama", "descricao": "Bairro histórico de Lisboa, berço do fado e das vielas medievais.", "imagem": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80" },
+        { "id": 3, "nome": "Mosteiro dos Jerónimos", "descricao": "Imponente mosteiro manuelino, Patrimônio Mundial da UNESCO.", "imagem": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" }
+      ],
+      "tags": ["fado", "história", "gastronomia", "cultura"]
+    }
+  ],
+  "continentes": [
+    { "id": 1, "nome": "Europa", "emoji": "🇪🇺" },
+    { "id": 2, "nome": "Ásia", "emoji": "🌏" },
+    { "id": 3, "nome": "América do Sul", "emoji": "🌎" },
+    { "id": 4, "nome": "América do Norte", "emoji": "🌎" },
+    { "id": 5, "nome": "África", "emoji": "🌍" },
+    { "id": 6, "nome": "Oceania", "emoji": "🌏" }
+  ],
+  "comentarios": [
+    { "id": 1, "lugarId": 1, "autor": "Mariana Costa", "texto": "Paris é mágica! A Torre Eiffel à noite é inesquecível.", "nota": 5 },
+    { "id": 2, "lugarId": 3, "autor": "Rafael Lima", "texto": "Rio de Janeiro superou todas as expectativas. Voltarei com certeza!", "nota": 5 },
+    { "id": 3, "lugarId": 5, "autor": "Sofia Mendes", "texto": "Barcelona é perfeita. A Sagrada Família me deixou sem palavras.", "nota": 5 },
+    { "id": 4, "lugarId": 9, "autor": "André Moreira", "texto": "Bali é o destino mais espiritual que já visitei. Recomendo Ubud!", "nota": 5 }
+  ],
+  "favoritos": [
+    { "id": 1, "lugarId": 1 },
+    { "id": 2, "lugarId": 5 },
+    { "id": 3, "lugarId": 9 }
+  ]
+}
